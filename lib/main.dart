@@ -1,3 +1,6 @@
+import 'package:animations/features/auth/view/login_view.dart';
+import 'package:animations/features/auth/view/signup_view.dart';
+import 'package:animations/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: const Scaffold(),
+      theme: AppTheme.theme,
+      home: const SignUpView(),
     );
   }
 }
