@@ -1,19 +1,21 @@
 import 'package:animations/common/rounded_button.dart';
 import 'package:animations/constants/ui_constants.dart';
+import 'package:animations/features/auth/controller/auth_controller.dart';
 import 'package:animations/features/auth/controller/textfield.dart';
 import 'package:animations/features/auth/view/login_view.dart';
 import 'package:animations/theme/theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignUpView extends StatefulWidget {
+class SignUpView extends ConsumerStatefulWidget {
   const SignUpView({super.key});
 
   @override
-  State<SignUpView> createState() => _SignUpViewState();
+  ConsumerState<SignUpView> createState() => _SignUpViewState();
 }
 
-class _SignUpViewState extends State<SignUpView> {
+class _SignUpViewState extends ConsumerState<SignUpView> {
   final appBar = UIConstants.appBar();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -23,6 +25,14 @@ class _SignUpViewState extends State<SignUpView> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void signUp() {
+    ref.read(authControllerProvider.notifier).signUp(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
   }
 
   @override
@@ -52,7 +62,7 @@ class _SignUpViewState extends State<SignUpView> {
                 Align(
                   alignment: Alignment.topRight,
                   child: RoundedButton(
-                    onTap: () {},
+                    onTap: signUp,
                     lable: 'Done',
                     bgColor: Pallete.blueColor,
                     textColor: Pallete.backgroundColor,

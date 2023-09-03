@@ -1,7 +1,15 @@
 import 'package:animations/core/core.dart';
+import 'package:animations/core/providers.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:fpdart/fpdart.dart';
+
+final authAPIProvider = Provider((ref) {
+  final account = ref.watch(appwriteAccountProvider);
+  return AuthAPI(account: account);
+});
 
 abstract class IAuthAPI {
   FutureEither<User> signup({required String email, required String password});
@@ -16,7 +24,7 @@ class AuthAPI implements IAuthAPI {
       {required String email, required String password}) async {
     try {
       final account = await _account.create(
-        userId: 'unique()',
+        userId: ID.unique(),
         email: email,
         password: password,
       );

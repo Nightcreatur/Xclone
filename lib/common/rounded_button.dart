@@ -14,13 +14,16 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      label: Text(
-        lable,
-        style: TextStyle(color: textColor, fontSize: 16),
+    return InkWell(
+      onTap: onTap,
+      child: Chip(
+        label: Text(
+          lable,
+          style: TextStyle(color: textColor, fontSize: 16),
+        ),
+        backgroundColor: bgColor,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       ),
-      backgroundColor: bgColor,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     );
   }
 }
